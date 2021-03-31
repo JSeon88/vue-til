@@ -1,28 +1,27 @@
 <template>
 	<header>
-		<router-link to="/login">로그인</router-link> |
-		<router-link to="/signup">회원가입</router-link>
-		<p>{{ user }}</p>
-		<p>{{ formattedUser }}</p>
+		<template v-if="isLogin">
+			<span>{{ $store.state.username }} 님 환영합니다.</span>
+			<a href="#" @click="logout">Logout</a>
+		</template>
+		<template v-else>
+			<router-link to="/login">로그인</router-link> |
+			<router-link to="/signup">회원가입</router-link>
+		</template>
 	</header>
 </template>
 
 <script>
 export default {
-	props: {
-		user: {
-			type: String,
-			required: true,
-		},
-	},
-	watch: {
-		user(newVal, oldVal) {
-			console.log({ newVal, oldVal });
-		},
-	},
 	computed: {
-		formattedUser() {
-			return `[${this.user}]`;
+		isLogin() {
+			return this.$store.getters.isLogin;
+		},
+	},
+	methods: {
+		logout() {
+			this.$store.commit('clearUserName');
+			this.$router.push('/login');
 		},
 	},
 };
