@@ -1,6 +1,7 @@
 <template>
 	<div>
-		<app-header :user="user"></app-header>
+		<button @click="isShow = !isShow">토글</button>
+		<app-header v-if="isShow" :user="user"></app-header>
 		<router-view @test="test2"></router-view>
 	</div>
 </template>
@@ -12,6 +13,7 @@ export default {
 	data() {
 		return {
 			user: '',
+			isShow: true,
 		};
 	},
 	components: {
