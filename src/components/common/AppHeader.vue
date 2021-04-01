@@ -1,28 +1,36 @@
 <template>
 	<header>
-		<router-link to="/login">로그인</router-link> |
-		<router-link to="/signup">회원가입</router-link>
-		<p>{{ user }}</p>
-		<p>{{ formattedUser }}</p>
+		<h1>header</h1>
+		arr : {{ arr }} <br />
+		oarr : {{ oarr }} <br />
+		handleObj : {{ handleObj }} <br />
 	</header>
 </template>
 
 <script>
 export default {
+	data() {
+		return {
+			a: '',
+		};
+	},
 	props: {
-		user: {
-			type: String,
-			required: true,
-		},
+		arr: Array,
+		oarr: Object,
+		handleObj: Object,
 	},
 	watch: {
-		user(newVal, oldVal) {
-			console.log({ newVal, oldVal });
+		arr(newVal, oldVal) {
+			console.error('change arr', newVal, oldVal);
 		},
-	},
-	computed: {
-		formattedUser() {
-			return `[${this.user}]`;
+		oarr(newVal, oldVal) {
+			console.error('change Object', newVal, oldVal);
+		},
+		handleObj: {
+			handler: function (newVal) {
+				console.error('handle Object arr', newVal);
+			},
+			deep: false,
 		},
 	},
 };
