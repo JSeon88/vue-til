@@ -1,5 +1,8 @@
 module.exports = {
-    devServer : {
-        overlay: false
-    }
+	devServer: {
+		overlay: false,
+	},
+	configureWebpack: {
+		devtool: 'source-map',
+	},
 };
