@@ -2,9 +2,16 @@ import axios from 'axios';
 //import store from '@/store/index';
 import { setInterceptor } from '@/api/common/interceptors';
 
-function createInstance() {
+function createInstace() {
 	const instance = axios.create({
 		baseURL: process.env.VUE_APP_API_URL,
+	});
+	return instance;
+}
+
+function createInstanceWithAuth(url) {
+	const instance = axios.create({
+		baseURL: `${process.env.VUE_APP_API_URL}${url}`,
 		// headers: {
 		// 	Authorization: store.state.token,
 		// },
@@ -12,22 +19,5 @@ function createInstance() {
 	return setInterceptor(instance);
 }
 
-const instance = createInstance();
-
-function registerUser(userData) {
-	return instance.post('signup', userData);
-}
-
-function loginUser(userData) {
-	return instance.post('login', userData);
-}
-
-function fetchPosts() {
-	return instance.get('posts');
-}
-
-function createPosts(postData) {
-	return instance.post('posts', postData);
-}
-
-export { registerUser, loginUser, fetchPosts, createPosts };
+export const instance = createInstace();
+export const posts = createInstanceWithAuth('posts');
