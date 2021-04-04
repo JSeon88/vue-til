@@ -9,6 +9,7 @@
 				:postItem="postItem"
 			></post-list-item>
 		</ul>
+		<router-link to="/add">추가</router-link>
 	</div>
 </template>
 
