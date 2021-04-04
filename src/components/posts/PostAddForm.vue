@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { createPosts } from '@/api/index';
+import { createPosts } from '@/api/posts';
 export default {
 	data() {
 		return {
@@ -37,6 +37,7 @@ export default {
 					contents: this.contents,
 				};
 				await createPosts(postData);
+				this.$router.push('/main');
 			} catch (error) {
 				this.logMessage = error.response.data.message;
 			}
