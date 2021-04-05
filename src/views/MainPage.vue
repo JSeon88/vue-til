@@ -7,6 +7,7 @@
 				v-for="postItem in postItems"
 				:key="postItem._id"
 				:postItem="postItem"
+				@refresh="fetchData"
 			></post-list-item>
 		</ul>
 		<router-link to="/add">추가</router-link>

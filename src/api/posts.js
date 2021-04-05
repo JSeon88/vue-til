@@ -9,4 +9,8 @@ function createPosts(postData) {
 	return posts.post('/', postData);
 }
 
-export { fetchPosts, createPosts };
+function deletePost(id) {
+	return posts.delete(id);
+}
+
+export { fetchPosts, createPosts, deletePost };
