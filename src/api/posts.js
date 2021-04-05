@@ -13,4 +13,12 @@ function deletePost(id) {
 	return posts.delete(id);
 }
 
-export { fetchPosts, createPosts, deletePost };
+function fetchPost(id) {
+	return posts.get(id);
+}
+
+function editPost(id, postData) {
+	return posts.put(id, postData);
+}
+
+export { fetchPosts, createPosts, deletePost, fetchPost, editPost };
