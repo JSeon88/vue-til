@@ -4,7 +4,8 @@
 			<div>제목 : {{ postItem.title }}</div>
 			<div>내용 : {{ postItem.contents }}</div>
 			<div>등록일 : {{ postItem.createdAt }}</div>
-			<a href="#" @click="deleteItem">삭제</a>
+			<button @click="routeEditPage">수정</button>
+			<button @click="deleteItem">삭제</button>
 		</li>
 	</div>
 </template>
@@ -24,6 +25,9 @@ export default {
 				await deletePost(this.postItem._id);
 				this.$emit('refresh');
 			}
+		},
+		routeEditPage() {
+			this.$router.push(`/post/${this.postItem._id}`);
 		},
 	},
 };

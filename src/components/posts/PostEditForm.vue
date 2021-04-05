@@ -1,0 +1,61 @@
+<template>
+	<form @submit.prevent="submitForm">
+		<div>
+			<label for="title">제목: </label>
+			<input id="title" type="text" v-model="title" />
+		</div>
+		<div>
+			<label for="contents">내용: </label>
+			<textarea id="contents" type="text" rows="5" v-model="contents" />
+			<p v-if="!isContentsValid">Contents length must be less than 200</p>
+		</div>
+		<button type="submit">수정</button>
+		<p>{{ logMessage }}</p>
+	</form>
+</template>
+
+<script>
+import { fetchPost, editPost } from '@/api/posts';
+export default {
+	data() {
+		return {
+			title: '',
+			contents: '',
+			logMessage: '',
+		};
+	},
+	created() {
+		this.fetchData();
+	},
+	computed: {
+		isContentsValid() {
+			return this.contents.length < 200;
+		},
+	},
+	methods: {
+		async submitForm() {
+			try {
+				const id = this.$route.params.id;
+				await editPost(id, {
+					title: this.title,
+					contents: this.contents,
+				});
+				this.$router.push('/main');
+			} catch (error) {
+				this.logMessage = error;
+			}
+		},
+		async fetchData() {
+			try {
+				const { data } = await fetchPost(this.$route.params.id);
+				this.title = data.title;
+				this.contents = data.contents;
+			} catch (error) {
+				this.logMessage = error.response.data.message;
+			}
+		},
+	},
+};
+</script>
+
+<style></style>
