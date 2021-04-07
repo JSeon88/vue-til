@@ -1,7 +1,8 @@
 <template>
 	<header>
 		<template v-if="isLogin">
-			<span>{{ $store.state.username }} 님 환영합니다.</span>
+			<!-- <span>{{ $store.state.username }} 님 환영합니다.</span> -->
+			<span>{{ username }} 님 환영합니다.</span>
 			<a href="#" @click="logout">Logout</a>
 		</template>
 		<template v-else>
@@ -12,11 +13,15 @@
 </template>
 
 <script>
+import { mapGetters, mapState } from 'vuex';
 export default {
 	computed: {
-		isLogin() {
-			return this.$store.getters.isLogin;
-		},
+		...mapState(['username']),
+		...mapGetters(['isLogin']), // { isLogin: 스토어 매핑 }
+		// ...mapGetters({ isLogin: 'isLogin' }),
+		// isLogin() {
+		// 	return this.$store.getters.isLogin;
+		// },
 	},
 	methods: {
 		logout() {
